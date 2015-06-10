@@ -8,6 +8,10 @@ var browserSync = require('browser-sync');
 var gulp = require('gulp');
 var express = require('express');
 var morgan = require('morgan');
+var autoprefixer = require('autoprefixer-core');
+var postcss = require('gulp-postcss');
+var sass = require('gulp-sass');
+var gulpif = require('gulp-if');
 
 gulp.task('server', function () {
     var server = express();
@@ -29,8 +33,35 @@ gulp.task('reload', function () {
     browserSync.reload();
 });
 
-gulp.task('watch', ['browserSync', 'server'], function () {
-    gulp.watch(__dirname + '/public/html/*', ['reload']);
+gulp.task('style', function () {
+    return gulp.src(__dirname + '/public/html/scss/**/*.scss')
+        .pipe(sass({
+            sourceComments: 'map',
+            sourceMap     : 'sass',
+            outputStyle   : 'nested'
+        }))
+        .on('error', function (error) {
+            console.log(error);
+            process.exit(1);
+        })
+        .pipe(postcss([
+            autoprefixer({
+                browsers: [
+                    '> 1%',
+                    'last 2 version',
+                    'Firefox >= 20',
+                    'Opera 12.1'
+                ]
+            })
+        ]))
+        .pipe(gulp.dest(__dirname + '/public/html/css'))
+        .pipe(browserSync.stream());
+       // .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
+});
+
+gulp.task('watch', ['browserSync', 'style', 'server'], function () {
+    gulp.watch(__dirname + '/public/html/scss/**/*.scss', ['style']);
+    gulp.watch(__dirname + '/public/html/**/*.html', ['reload']);
 });
 
 /*
