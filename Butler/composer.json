@@ -1,0 +1,36 @@
+{
+    "name": "aaronjan/butler",
+    "description": "",
+    "keywords": [
+
+    ],
+    "license": "Apache V2",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Aaron Jan",
+            "homepage": "https://github.com/AaronJan"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1",
+        "mockery/mockery": "^0.9.4"
+    },
+    "autoload": {
+        "classmap": [
+
+        ],
+        "psr-4": {
+            "Butler\\": "src/Butler/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+
+        ]
+    }
+}

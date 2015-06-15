@@ -1,0 +1,7 @@
+suites:
+    butler_suite:
+        namespace: Butler
+        psr4_prefix: Butler
+        src_path: src/Butler
+        spec_path: spec
+        spec_prefix: spec
