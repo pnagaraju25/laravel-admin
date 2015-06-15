@@ -8,6 +8,7 @@
     "gulp-if": "^1.2.5",
     "gulp-postcss": "^5.1.8",
     "gulp-sass": "^2.0.1",
+    "http-proxy": "^1.11.1",
     "laravel-elixir": "*",
     "morgan": "^1.5.3"
   }
